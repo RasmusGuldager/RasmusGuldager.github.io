@@ -1,5 +1,9 @@
 const {rows,cols,w,walls} = JSON.parse(localStorage.getItem("grid"));
 
+const useMaze = localStorage.getItem("useMaze") == "true"
+
+const info = JSON.parse(localStorage.getItem("info"))
+
 var grid = new Array(cols);
 
 var start;
@@ -26,7 +30,7 @@ class Spot {
     fill(color(this.color))
     stroke(0)
     rect(this.i*w,this.j*w,w,w);
-    if (done) {
+    if (done && !useMaze) {
       text(this.weight,this.i*w,(this.j+1)*w)
     }
   }
@@ -44,6 +48,7 @@ class Spot {
     if (this.i > 0 ) {
       this.neighbors.push(grid[this.j][this.i-1]);
     }
+    if(!useMaze) {
     if (this.i > 0 && this.j > 0) {
       this.neighbors.push(grid[this.j-1][this.i-1]);
     }
@@ -56,6 +61,7 @@ class Spot {
     if (this.i > 0 && this.j < rows-1 ) {
       this.neighbors.push(grid[this.j+1][this.i-1]);
     } 
+  }
   }
 }
 }
@@ -79,6 +85,15 @@ for (let i = 0; i < rows; i++) {
     } 
   for (let i = 0; i < grid[endX][endY].neighbors.length; i++) {
     grid[endX][endY].neighbors[i].wall = false
+  }
+  if (useMaze) {
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        grid[j][i].wall = info[j][i].wall == true
+        grid[j][i].color = info[j][i].color
+        grid[j][i].weight = 0
+      }
+    }
   }
 }
 

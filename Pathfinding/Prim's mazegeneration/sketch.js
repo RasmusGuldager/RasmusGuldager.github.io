@@ -1,7 +1,7 @@
 const {rows,cols,w} = JSON.parse(localStorage.getItem("grid"));
 
 var grid = new Array(cols);
-let info = new Array(cols)
+let info = new Array(cols);
 
 var start;
 var end;

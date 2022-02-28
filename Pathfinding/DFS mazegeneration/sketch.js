@@ -1,6 +1,7 @@
 const {rows,cols,w} = JSON.parse(localStorage.getItem("grid"));
 
 var grid = new Array(cols);
+let info = new Array(cols)
 
 var start;
 var end;
@@ -90,6 +91,26 @@ function setup() {
 
 make_grid();
 
+class ci {
+  constructor (i,j) {
+    this.wall = undefined
+    this.color = ""
+  }
+}
+
+function createinfo() {
+for (let i = 0; i < rows; i++) {
+  info[i] = new Array(rows)
+}
+for (let i = 0; i < rows; i++) {
+  for (let j = 0; j < cols; j++) {
+    info[i][j] = new ci(i,j)
+    info[i][j].wall = grid[i][j].wall
+    info[i][j].color = grid[i][j].color
+  }
+}
+}
+
 var start = grid[startY][startX];
 var end = grid[endY][endX];
 var openSet = [start];
@@ -100,6 +121,8 @@ function draw() {
   if (openSet.length == 0) {
     stopTimer()
     noLoop()
+    createinfo()
+    localStorage.setItem("info", JSON.stringify(info))
   } else {
   current.wall = false;
   for (let i = 0; i < current.neighbors.length; i++) {
