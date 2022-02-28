@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prim's mazegeneration</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="../libraries/p5.min.js"></script>
+    <script src="../libraries/p5.sound.min.js"></script>
+    <script>
+      function reload() {
+        location.reload()}
+    </script>
+  </head>
+
+  <body>
+    <a href="../Startside/index.html"><img src="../Graph.png" alt="Graph"></a>
+    <script src="sketch.js"></script>
+    <div><button id="reset" type="button" onClick="reload()">Reset</button></div>
+
+      <div id="Stopwatch">
+        00:00
+      </div>
+      
+      <script>
+      const timer = document.getElementById("Stopwatch");
+      
+      var min = 0;
+      var sec = -1;
+      var stoptime = false;
+      
+      function stopTimer() {
+        if (stoptime == false) {
+          stoptime = true;
+        }
+      }
+      
+      function stopwatch() {
+          if (stoptime == false) {
+          sec = parseInt(sec);
+          min = parseInt(min);
+      
+          sec = sec + 1;
+      
+          if (sec == 60) {
+            min = min + 1;
+            sec = 0;
+          }
+      
+          if (sec < 10 || sec == 0) {
+            sec = '0' + sec;
+          }
+          if (min < 10 || min == 0) {
+            min = '0' + min;
+          }
+      
+          if (isNaN(min)) [
+            min = "00"
+          ]
+      
+          timer.innerHTML = `${min}:${sec}`;
+      
+          setTimeout("stopwatch()", 1000);
+        }
+      }
+      document.addEventListener("DOMContentLoaded", stopwatch())
+      </script>
+      
+  </body>
+</html>
