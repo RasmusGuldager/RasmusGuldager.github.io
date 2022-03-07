@@ -59,3 +59,16 @@ for (let i = 0; i <= 5; i++) {
       }
     })
 }
+
+for (let i = 0; i <= 3; i++) {
+  document.querySelectorAll(".path")[i].addEventListener("click", (e) => {
+    let {rows} = JSON.parse(localStorage.getItem("grid"))
+    if (localStorage.getItem("useMaze") == "true" && rows !== JSON.parse(localStorage.getItem("info")).length) {
+      window.alert("Generate a maze first")
+      document.getElementById("path1").href = ""
+      document.getElementById("path2").href = ""
+      document.getElementById("path3").href = ""
+      document.getElementById("path4").href = ""
+    }
+  })
+}
