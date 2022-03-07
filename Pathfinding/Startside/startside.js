@@ -1,4 +1,4 @@
-if ({rows} = JSON.parse(localStorage.getItem("grid")) !== null) {
+if (localStorage.getItem("grid") !== null) {
     let {rows,w,walls} = JSON.parse(localStorage.getItem("grid")) 
     document.getElementById("rowsCols").value = rows
     document.getElementById("width").value = Math.round(w*rows)
@@ -11,7 +11,7 @@ if ({rows} = JSON.parse(localStorage.getItem("grid")) !== null) {
 
 document.getElementById("checkbox").checked = localStorage.getItem("useMaze") == "true"
 
-document.querySelector('input[type="checkbox"]').addEventListener("click", (e) => {
+document.querySelector('input[type="checkbox"]').addEventListener("click", () => {
     const useMaze = document.getElementById("checkbox").checked
     localStorage.setItem("useMaze", useMaze)
 })
@@ -36,34 +36,20 @@ for (let i = 0; i <= 5; i++) {
 })}
 
 for (let i = 0; i <= 1; i++) {
-   document.querySelectorAll(".mazee")[i].addEventListener("click", (e) => {
+   document.querySelectorAll(".mazee")[i].addEventListener("click", () => {
     const {rows} = JSON.parse(localStorage.getItem("grid"))
     if (rows % 2 == 0) {
-      window.alert("Rows/cols must be odd in the maze generation")
+      window.alert("Rows/cols must be odd in maze generation")
       document.getElementById("maze1").href = ""
       document.getElementById("maze2").href = ""
     }
    })
 }
-  
-for (let i = 0; i <= 5; i++) {
-    document.querySelectorAll('a')[i].addEventListener("click", (e) => {
-      if (localStorage.getItem("grid") == null) {
-        window.alert("Define settings")
-      document.getElementById("path1").href = ""
-      document.getElementById("path2").href = ""
-      document.getElementById("path3").href = ""
-      document.getElementById("path4").href = ""
-      document.getElementById("maze1").href = ""
-      document.getElementById("maze2").href = ""
-      }
-    })
-}
 
 for (let i = 0; i <= 3; i++) {
-  document.querySelectorAll(".path")[i].addEventListener("click", (e) => {
+  document.querySelectorAll(".path")[i].addEventListener("click", () => {
     let {rows} = JSON.parse(localStorage.getItem("grid"))
-    if (localStorage.getItem("useMaze") == "true" && rows !== JSON.parse(localStorage.getItem("info")).length) {
+    if (localStorage.getItem("useMaze") == "true" && rows != JSON.parse(localStorage.getItem("info")).length) {
       window.alert("Generate a maze first")
       document.getElementById("path1").href = ""
       document.getElementById("path2").href = ""
