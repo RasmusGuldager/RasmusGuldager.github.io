@@ -18,7 +18,7 @@ document.querySelector('input[type="checkbox"]').addEventListener("click", (e) =
 
 for (let i = 0; i <= 5; i++) {
     document.querySelectorAll('a')[i].addEventListener("click", (e) => {
-            if (document.getElementById("rowsCols").value < 5 || document.getElementById("width").value < document.getElementById("rowsCols").value * 4 || document.getElementById("rowsCols").value > 100 || document.getElementById("walls").value < 0 || document.getElementById("walls").value > 100) {
+        if (document.getElementById("rowsCols").value < 5 || document.getElementById("width").value < document.getElementById("rowsCols").value * 4 || document.getElementById("rowsCols").value > 100 || document.getElementById("walls").value < 0 || document.getElementById("walls").value > 100) {
               window.alert("Maze is too large or too small")
               document.getElementById("path1").href = ""
               document.getElementById("path2").href = ""
@@ -26,7 +26,7 @@ for (let i = 0; i <= 5; i++) {
               document.getElementById("path4").href = ""
               document.getElementById("maze1").href = ""
               document.getElementById("maze2").href = ""
-            } else {
+         } else {
             rows = document.getElementById("rowsCols").value;
             cols = document.getElementById("rowsCols").value;
             w = document.getElementById("width").value/rows;
