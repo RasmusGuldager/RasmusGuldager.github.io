@@ -35,17 +35,6 @@ for (let i = 0; i <= 5; i++) {
             }
 })}
 
-for (let i = 0; i <= 1; i++) {
-   document.querySelectorAll(".mazee")[i].addEventListener("click", () => {
-    const {rows} = JSON.parse(localStorage.getItem("grid"))
-    if (rows % 2 == 0) {
-      window.alert("Rows/cols must be odd in maze generation")
-      document.getElementById("maze1").href = ""
-      document.getElementById("maze2").href = ""
-    }
-   })
-}
-
 for (let i = 0; i <= 3; i++) {
   document.querySelectorAll(".path")[i].addEventListener("click", () => {
     let {rows} = JSON.parse(localStorage.getItem("grid"))
