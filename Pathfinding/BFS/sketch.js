@@ -176,8 +176,13 @@ function get_path(current) {
 //Variables that describes start and end positions
 var startY = 1;
 var startX = 1;
-var endY = rows-2;
-var endX = cols-2;
+if (rows % 2 == 1) {
+  var endY = rows-2;
+  var endX = cols-2;
+} else {
+  var endY = rows-3;
+  var endX = cols-3;
+}
 
 //P5 function that creates the canvas. The setup function is initialized when the program starts
 function setup() {

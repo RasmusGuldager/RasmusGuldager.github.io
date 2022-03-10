@@ -168,8 +168,13 @@ function get_path(current) {
 
 var startY = 1;
 var startX = 1;
-var endY = rows-2;
-var endX = cols-2;
+if (rows % 2 == 1) {
+  var endY = rows-2;
+  var endX = cols-2;
+} else {
+  var endY = rows-3;
+  var endX = cols-3;
+}
 
 function setup() {
   createCanvas(cols*w, rows*w);

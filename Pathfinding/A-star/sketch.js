@@ -184,8 +184,13 @@ function get_path(current) {
 //Variables that describes start and end positions
 var startY = 1;
 var startX = 1;
-var endY = rows-2;
-var endX = cols-2;
+if (rows % 2 == 1) {
+  var endY = rows-2;
+  var endX = cols-2;
+} else {
+  var endY = rows-3;
+  var endX = cols-3;
+}
 
 //P5 function that creates the canvas. The setup function is initialized when the program starts
 function setup() {
@@ -224,7 +229,7 @@ function draw() {
         let temp_g = current.g + 1;
         if (openSet.includes(neighbor)) {
           if (temp_g < neighbor.g) {
-            neighbor = temp_g;
+            neighbor.g = temp_g;
             neighbor.prev = current;
             neighbor.h = distance(neighbor,end);
             neighbor.f = neighbor.g + neighbor.h;
