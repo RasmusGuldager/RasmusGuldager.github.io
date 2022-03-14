@@ -106,9 +106,11 @@ for (let i = 0; i < rows; i++) {
   //This creates some space around start and end so there is a smaller chance to get an unsolvable maze
   for (let i = 0; i < grid[startX][startY].neighbors.length; i++) {
     grid[startX][startY].neighbors[i].wall = false
+    grid[startX][startY].neighbors[i].weight = Math.floor(Math.random(1)*5+1)
     } 
   for (let i = 0; i < grid[endX][endY].neighbors.length; i++) {
     grid[endX][endY].neighbors[i].wall = false
+    grid[startX][startY].neighbors[i].weight = Math.floor(Math.random(1)*5+1)
   }
   if (useMaze) {
     for (let i = 0; i < rows; i++) {
@@ -184,11 +186,11 @@ function findCurrentNode() {
   return curr
 }
 
-function weight(a) {
+function weight(node) {
   if (useMaze) {
     return 1
   } else {
-    return a.weight
+    return node.weight
   }
 }
 
@@ -253,7 +255,6 @@ function draw() {
           if (temp_g < neighbor.g) {
             neighbor.g = temp_g;
             neighbor.prev = current;
-            neighbor.h = dist(neighbor.i,neighbor.j,end.i,end.j) * 2;
             neighbor.f = neighbor.g + neighbor.h;
           }
          } else {
