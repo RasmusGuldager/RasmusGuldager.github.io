@@ -32,8 +32,10 @@ class Spot {
   this.prev = undefined;
   //Random generated walls
   this.wall = false;
+  this.weight = Math.floor(Math.random(1)*5+1)
   if (Math.random(1) < walls/100) {
     this.wall = true;
+    this.weight = 0;
   }
 
   //P5 function for drawing squares. Initialized in the draw_grid function
@@ -41,6 +43,9 @@ class Spot {
     fill(color(this.color))
     stroke(0);
     rect(this.i*w,this.j*w,w,w);
+    if (done && !useMaze) {
+      text(this.weight,this.i*w,(this.j+1)*w)
+    }
   }
 
   //Find neighbors for each spot
@@ -124,7 +129,21 @@ function draw_grid() {
       if (grid[j][i].wall == true){
         grid[j][i].color = "black";
       }
-
+      if (grid[j][i].weight === 1){
+        grid[j][i].color = "rgb(255,255,255)";
+      }
+      if (grid[j][i].weight === 2){
+        grid[j][i].color = "rgb(240,240,240)";
+      }
+      if (grid[j][i].weight === 3){
+        grid[j][i].color = "rgb(225,225,225)";
+      }
+      if (grid[j][i].weight === 4){
+        grid[j][i].color = "rgb(210,210,210)";
+      }
+      if (grid[j][i].weight === 5){
+        grid[j][i].color = "rgb(200,200,200)";
+      }
     } 
   }
   //The color for the open set is updated
@@ -165,10 +184,12 @@ function findCurrentNode() {
   return curr
 }
 
-//Function that returns distance from neighbor to end
-function distance(a,b) {
-  let d = dist(a.i,a.j,b.i,b.j);
-  return d;
+function weight(a) {
+  if (useMaze) {
+    return 1
+  } else {
+    return a.weight
+  }
 }
 
 function get_path(current) {
@@ -208,6 +229,7 @@ var closedSet = [];
 //Path starts as an empty array
 var path = [];
 //At the beginning the current node is start and is declared here
+start.weight = 0;
 
 //A* algorithm. The draw function is initialized each frame
 function draw() {
@@ -218,7 +240,7 @@ function draw() {
    current = findCurrentNode();
   if (current == end) { 
     get_path(current);
-    console.log(`Shortest path is ${path.length} tiles`)
+    console.log(`Shortest path is ${path.length} tiles with a weight of ${end.g}`)
   }
   else { 
   deleteElement(current,openSet);
@@ -226,19 +248,19 @@ function draw() {
   for (let i = 0; i < current.neighbors.length; i++) {
     let neighbor = current.neighbors[i];
     if (!closedSet.includes(neighbor) && !neighbor.wall) {
-        let temp_g = current.g + 1;
+        let temp_g = current.g + weight(neighbor);
         if (openSet.includes(neighbor)) {
           if (temp_g < neighbor.g) {
             neighbor.g = temp_g;
             neighbor.prev = current;
-            neighbor.h = distance(neighbor,end);
+            neighbor.h = dist(neighbor.i,neighbor.j,end.i,end.j) * 2;
             neighbor.f = neighbor.g + neighbor.h;
           }
          } else {
             neighbor.g = temp_g;
             openSet.push(neighbor);
             neighbor.prev = current;
-            neighbor.h = distance(neighbor,end);
+            neighbor.h = dist(neighbor.i,neighbor.j,end.i,end.j) * 2;
             neighbor.f = neighbor.g + neighbor.h;
           }
         }
@@ -246,4 +268,4 @@ function draw() {
   } 
  }
  draw_grid();
- }
+}
