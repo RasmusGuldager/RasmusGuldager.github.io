@@ -5,6 +5,8 @@ const useMaze = localStorage.getItem("useMaze") == "true"
 
 const info = JSON.parse(localStorage.getItem("info"))
 
+const heuristic = localStorage.getItem("heurist")
+
 //Variable grid is an array of all spots. Right here the array is created containing all columns
 var grid = new Array(cols);
 
@@ -261,7 +263,7 @@ function draw() {
             neighbor.g = temp_g;
             openSet.push(neighbor);
             neighbor.prev = current;
-            neighbor.h = dist(neighbor.i,neighbor.j,end.i,end.j) * 2;
+            neighbor.h = dist(neighbor.i,neighbor.j,end.i,end.j) * heuristic;
             neighbor.f = neighbor.g + neighbor.h;
           }
         }
