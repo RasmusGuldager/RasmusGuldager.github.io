@@ -164,7 +164,7 @@ function draw_grid() {
 //Variables that describes start and end positions
 var startY = 1;
 var startX = 1;
-if (rows % 2 == 1) {
+if (rows % 2 == 1 || !useMaze) {
   var endY = rows-2;
   var endX = cols-2;
 } else {
