@@ -9,11 +9,25 @@ if (localStorage.getItem("grid") !== null) {
     document.getElementById("walls").value = 50
 }
 
-document.getElementById("checkbox").checked = localStorage.getItem("useMaze") == "true"
+document.getElementById("checkbox1").checked = localStorage.getItem("useMaze") == "true"
+document.getElementById("checkbox2").checked = localStorage.getItem("useOwnGrid") == "true"
 
-document.querySelector('input[type="checkbox"]').addEventListener("click", () => {
-    const useMaze = document.getElementById("checkbox").checked
+document.querySelectorAll('input[type="checkbox"]')[0].addEventListener("click", () => {
+    const useMaze = document.getElementById("checkbox1").checked
     localStorage.setItem("useMaze", useMaze)
+    if (document.getElementById("checkbox1").checked && document.getElementById("checkbox2").checked) {
+      document.getElementById("checkbox2").checked = false
+      localStorage.setItem("useOwnGrid", false)
+    }
+})
+
+document.querySelectorAll('input[type="checkbox"]')[1].addEventListener("click", () => {
+  const useOwnGrid = document.getElementById("checkbox2").checked
+  localStorage.setItem("useOwnGrid", useOwnGrid)
+  if (document.getElementById("checkbox1").checked && document.getElementById("checkbox2").checked) {
+    document.getElementById("checkbox1").checked = false
+    localStorage.setItem("useMaze", false)
+  }
 })
 
 for (let i = 0; i <= 5; i++) {

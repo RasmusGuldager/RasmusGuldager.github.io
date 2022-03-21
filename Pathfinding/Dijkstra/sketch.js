@@ -1,8 +1,10 @@
 const {rows,cols,w,walls} = JSON.parse(localStorage.getItem("grid"));
 
 const useMaze = localStorage.getItem("useMaze") == "true"
+const useOwnGrid = localStorage.getItem("useOwnGrid") == "true"
 
 const info = JSON.parse(localStorage.getItem("info"))
+const owngrid = JSON.parse(localStorage.getItem("OwnGrid"))
 
 var grid = new Array(cols);
 
@@ -92,6 +94,15 @@ for (let i = 0; i < rows; i++) {
         grid[j][i].wall = info[j][i].wall == true
         grid[j][i].color = info[j][i].color
         grid[j][i].weight = 0
+      }
+    }
+  }
+  if (useOwnGrid) {
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        grid[j][i].wall = owngrid[j][i].wall == true
+        grid[j][i].weight = owngrid[j][i].weight
+        grid[j][i].color = owngrid[j][i].color
       }
     }
   }

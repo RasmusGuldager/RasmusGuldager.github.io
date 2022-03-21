@@ -14,16 +14,12 @@ class Spot {
   this.j = j;
   this.color = "black"
   this.neighbors = []
-  this.prev = undefined;
   this.wall = true;
 
   this.draw_spot = function() {
     fill(color(this.color))
     stroke(0)
     rect(this.i*w,this.j*w,w,w);
-    if (done) {
-      text(this.weight,this.i*w,(this.j+1)*w)
-    }
   }
 
   this.findNeighbors = function() {
@@ -97,7 +93,7 @@ function setup() {
 make_grid();
 
 class ci {
-  constructor (i,j) {
+  constructor () {
     this.wall = undefined
     this.color = ""
   }

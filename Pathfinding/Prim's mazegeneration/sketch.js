@@ -14,16 +14,12 @@ class Spot {
   this.j = j;
   this.color = "black"
   this.neighbors = []
-  this.prev = undefined;
   this.wall = true;
 
   this.draw_spot = function() {
     fill(color(this.color))
     stroke(0)
     rect(this.i*w,this.j*w,w,w);
-    if (done) {
-      text(this.weight,this.i*w,(this.j+1)*w)
-    }
   }
 
   this.findNeighbors = function() {
@@ -70,8 +66,11 @@ function draw_grid() {
       }
     } 
   }
-  if (!currentneighbors.length == 0) {
+  if (!openSet.length == 0) {
     current.color = "aqua";
+  }
+  for (let i = 0; i < openSet.length; i++) {
+    openSet[i].color = "Green";
   }
   start.color = "Yellow";
   end.color = "Yellow";
@@ -102,7 +101,7 @@ function setup() {
 make_grid();
 
 class ci {
-  constructor (i,j) {
+  constructor () {
     this.wall = undefined
     this.color = ""
   }
@@ -123,30 +122,30 @@ for (let i = 0; i < rows; i++) {
 
 var start = grid[startY][startX];
 var end = grid[endY][endX];
-var currentneighbors = [];
+var openSet = [];
 var currenttochoosefrom = [];
 var partofmaze = [start];
 start.wall = false;
 
 for (let i = 0; i < start.neighbors.length; i++) {
-  currentneighbors.push(start.neighbors[i])
+  openSet.push(start.neighbors[i])
 }
 
 function draw() {
-  if (currentneighbors.length == 0) {
+  if (openSet.length == 0) {
     noLoop()
     stopTimer()
     createinfo()
     localStorage.setItem("info", JSON.stringify(info))
   } else {
-  current = currentneighbors[Math.floor(Math.random(1)*currentneighbors.length)]
-  deleteElement(current,currentneighbors)
+  current = openSet[Math.floor(Math.random(1)*openSet.length)]
+  deleteElement(current,openSet)
   partofmaze.push(current)
   current.wall = false;
   for (let i = 0; i < current.neighbors.length; i++) {
     let neighbor = current.neighbors[i]
     if (neighbor.wall) {
-      currentneighbors.push(neighbor)
+      openSet.push(neighbor)
     }
   }
   for (let i = 0; i < current.neighbors.length; i++) {

@@ -15,7 +15,7 @@
 
   <body>
     <img src="Pathfinding/Graph.png" alt="Graph">
-    <h1>Pathfinding</h1>
+    <h1>SRP Projekt</h1>
     <div id="wrap">
 
       <div id="Settings">
@@ -28,7 +28,11 @@
         <input id="walls" type="number"> </div>
         <p>Use maze in pathfinding</p>
         <label class="switch">
-          <input id="checkbox" type="checkbox">
+          <input id="checkbox1" type="checkbox">
+          <span class="slider"></span>
+        </label>
+        <label class="switch">
+          <input id="checkbox2" type="checkbox">
           <span class="slider"></span>
         </label><br>
         </div>
@@ -46,7 +50,9 @@
       <div class="dropdown-content">
     <a id="maze1" class="mazee" href="Pathfinding/DFS mazegeneration/DFSMaze.html">Randomized DFS mazegeneration</a>
     <a id="maze2" class="mazee" href="Pathfinding/Prim's mazegeneration/PrimsMaze.html">Randomized Prim's mazegeneration</a>
-  </div>
+  </div></div>
+  <div class="dropdown">
+    <button class="dropbtn" onClick="window.location.href='Pathfinding/Make own grid/Makeowngrid.html'">Make your own grid</button>
   </div>
   </div>
 </div>
