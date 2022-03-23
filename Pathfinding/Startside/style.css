@@ -15,7 +15,7 @@ img {
 h1 {
     color: black;
     background-color: gray;
-    padding: 1.3rem;
+    padding: 1.5%;
     letter-spacing: 0.15rem;
     text-align: center;
     margin: 0;
@@ -35,7 +35,7 @@ input {
 
 p {
     color: white;
-    margin-top: 10px;
+    margin-top: 6px;
 }
 
 #Settings {

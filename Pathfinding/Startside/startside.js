@@ -49,6 +49,19 @@ for (let i = 0; i <= 5; i++) {
             }
 })}
 
+document.querySelectorAll('button')[2].addEventListener("click", () => {
+  if (document.getElementById("rowsCols").value < 5 || document.getElementById("width").value < document.getElementById("rowsCols").value * 4 || document.getElementById("rowsCols").value > 100 || document.getElementById("walls").value < 0 || document.getElementById("walls").value > 100) {
+      window.alert("Maze is too large or too small")
+      window.location.href = ""
+  } else {
+      rows = document.getElementById("rowsCols").value;
+      cols = document.getElementById("rowsCols").value;
+      w = document.getElementById("width").value/rows;
+      walls = document.getElementById("walls").value;
+      localStorage.setItem("grid", JSON.stringify({rows:rows,cols:cols,w:w,walls:walls}))
+  }
+})
+
 for (let i = 0; i <= 3; i++) {
   document.querySelectorAll(".path")[i].addEventListener("click", () => {
     let {rows} = JSON.parse(localStorage.getItem("grid"))

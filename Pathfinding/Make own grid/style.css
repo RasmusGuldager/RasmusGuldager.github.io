@@ -6,16 +6,34 @@ html, body {
   
   canvas {
     display: block;
+    position: absolute;
+    left: 50%;
+    top: 58%;
+    transform: translate(-50%, -50%);
   }
   
   body {
     display: flex;
     flex-direction: row;
   }
+
+  h1 {
+    color: black;
+    background-color: gray;
+    padding: 1.5%;
+    letter-spacing: 0.15rem;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    font-family: "Bungee Inline", cursive;
+    font-size: 3rem;
+    display: flex;
+    width: 100%;
+    cursor: pointer;
+  }
   
   body :nth-child(2) { order: 2; }
   body :nth-child(3) { order: 3; }
-  body :nth-child(4) { order: 4; }
   
   div {
     display: flex;
@@ -33,4 +51,10 @@ html, body {
     top: 0;
     right: 0;
     z-index: 1;
+  }
+
+  button {
+    position: absolute;
+    left: 0;
+    bottom: 0;
   }

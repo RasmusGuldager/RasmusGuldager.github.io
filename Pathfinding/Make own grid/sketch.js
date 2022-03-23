@@ -1,5 +1,7 @@
 const {rows,cols,w} = JSON.parse(localStorage.getItem("grid"));
 
+const PrevGrid = JSON.parse(localStorage.getItem("OwnGrid"))
+
 var grid = new Array(cols);
 let owngrid = new Array(cols);
 
@@ -80,19 +82,31 @@ class ci {
   }
 }
 
-function createowngrid() {
 for (let i = 0; i < rows; i++) {
   owngrid[i] = new Array(rows)
-}
+} 
 for (let i = 0; i < rows; i++) {
-  for (let j = 0; j < cols; j++) {
+  for (let j = 0; j < rows; j++) {
     owngrid[i][j] = new ci(i,j)
-    owngrid[i][j].wall = grid[i][j].wall
-    owngrid[i][j].color = grid[i][j].color
-    owngrid[i][j].weight = grid[i][j].weight
   }
 }
-localStorage.setItem("OwnGrid", JSON.stringify(owngrid))
+
+document.addEventListener("DOMContentLoaded", () => {
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < rows; j++) {
+      grid[i][j].wall = PrevGrid[i][j].wall
+      grid[i][j].color = PrevGrid[i][j].color
+    }
+  }
+})
+
+function reload() {
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < rows; j++) {
+      grid[i][j].wall = false
+      grid[i][j].color = "black"
+    }
+  }
 }
 
 var start = grid[startY][startX];
@@ -108,4 +122,12 @@ for (let i = 0; i < rows; i++) {
 }
 }
 draw_grid();
+for (let i = 0; i < rows; i++) {
+  for (let j = 0; j < cols; j++) {
+    owngrid[i][j].wall = grid[i][j].wall
+    owngrid[i][j].color = grid[i][j].color
+    owngrid[i][j].weight = grid[i][j].weight
+  }
+}
+localStorage.setItem("OwnGrid", JSON.stringify(owngrid))
 }
