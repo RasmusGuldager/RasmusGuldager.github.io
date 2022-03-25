@@ -2,6 +2,14 @@ const {rows,cols,w} = JSON.parse(localStorage.getItem("grid"));
 
 const PrevGrid = JSON.parse(localStorage.getItem("OwnGrid"))
 
+let erase = localStorage.getItem("erase") == "true"
+document.getElementById("checkbox").checked = localStorage.getItem("erase") == "true"
+
+document.querySelector("input").addEventListener("click", () => {
+    erase = document.getElementById("checkbox").checked
+    localStorage.setItem("erase", erase)
+})
+
 var grid = new Array(cols);
 let owngrid = new Array(cols);
 
@@ -25,6 +33,12 @@ class Spot {
 
   this.clicked = () => {
       if (mouseX < this.i*w + w && mouseX > this.i*w && mouseY < this.j*w + w && mouseY > this.j*w) {
+        if (erase) {
+          this.wall = false
+          this.weight = Math.floor(Math.random(1)*5+1)
+          this.color = "white"
+          return
+        }
         this.wall = true
         this.weight = 0
         this.color = "black"

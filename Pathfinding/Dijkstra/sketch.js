@@ -205,13 +205,13 @@ function draw() {
   if (openSet.length == 0 || done) {
     stopTimer()
     noLoop()
-  } else {
+    return
+  }
   current = findCurrentNode();
   if (current == end) { 
     get_path(current);
     console.log(`Shortest path is ${path.length} tiles with a weight of ${end.distance}`)
-  }
-  else { 
+  } else { 
     deleteElement(current,openSet);
     closedSet.push(current)
     for (let i = 0; i < current.neighbors.length; i++) {
@@ -223,7 +223,6 @@ function draw() {
       }
     }
   } 
- }
  draw_grid();
- }
+}
 
