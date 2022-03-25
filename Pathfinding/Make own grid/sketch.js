@@ -21,15 +21,13 @@ class Spot {
     fill(color(this.color))
     stroke(0)
     rect(this.i*w,this.j*w,w,w);
-    if (done) {
-      text(this.weight,this.i*w,(this.j+1)*w)
-    }
   }
 
   this.clicked = () => {
       if (mouseX < this.i*w + w && mouseX > this.i*w && mouseY < this.j*w + w && mouseY > this.j*w) {
         this.wall = true
         this.weight = 0
+        this.color = "black"
       }
     }
 }
@@ -79,6 +77,7 @@ class ci {
   constructor () {
     this.wall = undefined
     this.color = ""
+    this.weight = 0
   }
 }
 
@@ -96,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let j = 0; j < rows; j++) {
       grid[i][j].wall = PrevGrid[i][j].wall
       grid[i][j].color = PrevGrid[i][j].color
+      grid[i][j].weight = PrevGrid[i][j].weight
     }
   }
 })
@@ -104,9 +104,18 @@ function reload() {
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < rows; j++) {
       grid[i][j].wall = false
-      grid[i][j].color = "black"
+      grid[i][j].color = "white"
+      grid[i][j].weight = Math.floor(Math.random(1)*5+1)
     }
   }
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      owngrid[i][j].wall = grid[i][j].wall
+      owngrid[i][j].color = grid[i][j].color
+      owngrid[i][j].weight = grid[i][j].weight
+    }
+  }
+  localStorage.setItem("OwnGrid", JSON.stringify(owngrid))
 }
 
 var start = grid[startY][startX];
@@ -120,8 +129,6 @@ for (let i = 0; i < rows; i++) {
       grid[j][i].clicked()
     }
 }
-}
-draw_grid();
 for (let i = 0; i < rows; i++) {
   for (let j = 0; j < cols; j++) {
     owngrid[i][j].wall = grid[i][j].wall
@@ -129,5 +136,7 @@ for (let i = 0; i < rows; i++) {
     owngrid[i][j].weight = grid[i][j].weight
   }
 }
+}
+draw_grid();
 localStorage.setItem("OwnGrid", JSON.stringify(owngrid))
 }

@@ -63,7 +63,7 @@ p {
     overflow: hidden;
     background-color: #699ec2;
     font-family: Arial;
-    width: 200vh;
+    width: 200vw;
 }
   
 .dropdown {
@@ -93,7 +93,7 @@ p {
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    width: 20rem;
+    width: 22rem;
 }
 
 .dropdown-content a {
@@ -111,6 +111,10 @@ p {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+#MakeGrid {
+    cursor: pointer
 }
 
 .switch {
