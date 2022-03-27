@@ -17,13 +17,18 @@
   </head>
 
   <body>
+    <h1 onClick="window.location.href='../../index.html'">SRP Projekt</h1>
     <a href="../../index.html"><img src="../Graph.png" alt="Graph"></a>
-    <script src="sketch.js"></script>
-    <div><button id="reset" type="button" onClick="reload()">Reset</button></div>
 
-      <div id="Stopwatch">
-        00:00
-      </div>
+    <div id="settings">
+      <h2>Settings & stats</h2><br>
+    <button id="reset" type="button" onClick="reload()">Reset</button><br>
+    <h2 id="Stopwatch">
+      00:00
+    </h2>
+    <p id="Stats1" style="margin-bottom: 0;">Shortest path is:</p>
+    <p id="Stats2" style="margin-top: 0.5rem;">Total weight is: </p>
+  </div>
       
       <script>
       const timer = document.getElementById("Stopwatch");
@@ -68,6 +73,6 @@
       }
       document.addEventListener("DOMContentLoaded", stopwatch())
       </script>
-
+ <script src="sketch.js"></script>
   </body>
 </html>

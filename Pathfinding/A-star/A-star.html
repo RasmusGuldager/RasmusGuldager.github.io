@@ -19,9 +19,7 @@
         localStorage.setItem("heurist", 2)
       }
     }
-
       function reload() {
-        localStorage.setItem("heurist", document.getElementById("heurist").value)
         location.reload()}
     </script>
 </head>
@@ -29,18 +27,22 @@
 <body>
   <h1 onClick="window.location.href='../../index.html'">SRP Projekt</h1>
   <a href="../../index.html"><img src="../Graph.png" alt="Graph"></a>
-  <script src="sketch.js"></script>
+  
 
   <div id="settings">
-    <h2>Settings</h2><br>
+    <h2>Settings & stats</h2><br>
   <button id="reset" type="button" onClick="reload()">Reset</button><br>
   <p>Heuristic value</p>
   <input type="number" id="heurist"><br><br>
   <p style="margin: 0;">The heuristic value is:</p>
-  <p>Dist(node, end) * input</p>
+  <p style="margin-top: 0;">Dist(node, end) * input</p>
+  <p style="margin: 0;">If input <= 1</p>
+  <p style="margin-top: 0;">shortest path is guaranteed</p>
   <h2 id="Stopwatch">
     00:00
   </h2>
+  <p id="Stats1" style="margin-bottom: 0;">Shortest path is:</p>
+  <p id="Stats2" style="margin-top: 0.5rem;">Total weight is: </p>
 </div>
     
     <script>
@@ -85,7 +87,12 @@
       }
     }
     document.addEventListener("DOMContentLoaded", stopwatch())
+    
+  document.querySelector('input').addEventListener("input", () => {
+    localStorage.setItem("heurist", document.getElementById("heurist").value)
+  })
     </script>
-
+    
+<script src="sketch.js"></script>
 </body>
 </html>

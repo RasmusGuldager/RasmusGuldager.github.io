@@ -52,8 +52,7 @@ input {
   border-radius: 0.3rem;
   text-align: center;
   border-color: #2b6777;
-  background-color: #2b6777;
-  color: white;
+  color: black;
 }
 
 button {
@@ -61,8 +60,7 @@ button {
   border-color: #2b6777;
   padding: 0.1rem 0.5rem 0.1rem 0.5rem;
   cursor: pointer;
-  color: white;
-  background-color: #2b6777;
+  color: black;
 }
 
 img {

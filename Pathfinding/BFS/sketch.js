@@ -190,7 +190,8 @@ function draw() {
    current = openSet.shift()
   if (current == end) { 
     get_path(current);
-    console.log(`Shortest path is ${path.length} tiles with a weight of ${end.distance}`)
+    document.getElementById("Stats1").innerHTML = `Shortest path is: ${path.length} tiles`
+    document.getElementById("Stats2").innerHTML = `Total weight is: ${end.distance}`
   } else {
     closedSet.push(current)
     for (let i = 0; i < current.neighbors.length; i++) {

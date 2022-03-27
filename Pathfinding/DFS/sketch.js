@@ -179,7 +179,8 @@ function draw() {
   if (current == end) { 
     path = openSet
     done = true
-    console.log(`The path is ${path.length} tiles with a weight of ${TotalWeight}`)
+    document.getElementById("Stats1").innerHTML = `Shortest path is: ${path.length} tiles`
+    document.getElementById("Stats2").innerHTML = `Total weight is: ${TotalWeight}`
   }
   else { 
     let FoundNeighbor = false

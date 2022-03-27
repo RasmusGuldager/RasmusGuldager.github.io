@@ -220,7 +220,8 @@ function draw() {
   current = findCurrentNode();
   if (current == end) { 
     get_path(current);
-    console.log(`Shortest path is ${path.length} tiles with a weight of ${end.g}`)
+    document.getElementById("Stats1").innerHTML = `Shortest path is: ${path.length} tiles`
+    document.getElementById("Stats2").innerHTML = `Total weight is: ${end.g}`
   } else {
     deleteElement(current,openSet);
   closedSet.push(current);

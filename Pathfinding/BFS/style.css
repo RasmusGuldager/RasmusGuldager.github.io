@@ -1,28 +1,59 @@
 html, body {
-  background-color: rgb(189, 189, 189);
+  background-color: #c8d8e4;
   margin: 0;
   padding: 0;
 }
 
 canvas {
   display: block;
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  transform: translate(-50%, -50%);
 }
 
-body {
-  display: flex;
-  flex-direction: row;
+h1 {
+  color: white;
+  background-color: #2b6777;
+  padding: 1.5%;
+  letter-spacing: 0.15rem;
+  text-align: center;
+  margin: 0;
+  font-family: "Bungee Inline", cursive;
+  font-size: 3rem;
+  cursor: pointer;
 }
 
-body :nth-child(3) { order: 3; }
-body :nth-child(4) { order: 4; }
+h2 {
+  color: white;
+  font-size: x-large;
+}
 
-div {
+#settings {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  background-color: #52ab98;
+  position: absolute;
+  left: 0;
+  width: 12.5rem;
+  height: 31rem;
 }
 
 a {
   text-decoration: none;
+}
+
+p {
+  color: white;
+}
+
+button {
+  border-radius: 0.3rem;
+  border-color: #2b6777;
+  padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+  cursor: pointer;
+  color: black;
 }
 
 img {
