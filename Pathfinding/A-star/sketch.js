@@ -216,7 +216,7 @@ function draw() {
   if (openSet.length == 0 || done) {
     stopTimer()
     noLoop()
-  }
+  } else {
   current = findCurrentNode();
   if (current == end) { 
     get_path(current);
@@ -228,19 +228,22 @@ function draw() {
     let neighbor = current.neighbors[i];
     if (!closedSet.includes(neighbor) && !neighbor.wall) {
         let temp_g = current.g + weight(neighbor);
-          if (temp_g < neighbor.g && openSet.includes(neighbor)) {
+        if (openSet.includes(neighbor)) {
+          if (temp_g < neighbor.g) {
             neighbor.g = temp_g;
             neighbor.prev = current;
             neighbor.f = neighbor.g + neighbor.h;
-            return
-         }
+          }
+         } else {
           neighbor.g = temp_g;
           openSet.push(neighbor);
           neighbor.prev = current;
           neighbor.h = dist(neighbor.i,neighbor.j,end.i,end.j) * heuristic;
           neighbor.f = neighbor.g + neighbor.h;
         }
+      }
    }
   }
+}
 draw_grid();
 }

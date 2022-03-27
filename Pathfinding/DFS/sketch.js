@@ -173,8 +173,7 @@ function draw() {
   if (openSet.length == 0 || done) {
     stopTimer()
     noLoop()
-    return
-  }
+  } else {
   current = openSet[0];
   TotalWeight += current.weight;
   if (current == end) { 
@@ -198,5 +197,6 @@ function draw() {
     } 
     }
   } 
+}
  draw_grid();
 }

@@ -137,8 +137,7 @@ function draw() {
     stopTimer()
     createinfo()
     localStorage.setItem("info", JSON.stringify(info))
-    return
-  }
+  } else {
   current = openSet[Math.floor(Math.random(1)*openSet.length)]
   deleteElement(current,openSet)
   partofmaze.push(current)
@@ -164,6 +163,7 @@ function draw() {
     } else if (current.i == temp.i-2) {
       grid[current.j][current.i+1].wall = false
     }
+  }
  currenttochoosefrom = [];
  draw_grid();
  }

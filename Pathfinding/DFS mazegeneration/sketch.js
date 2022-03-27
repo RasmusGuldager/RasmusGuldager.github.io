@@ -124,8 +124,7 @@ function draw() {
     noLoop()
     createinfo()
     localStorage.setItem("info", JSON.stringify(info))
-    return
-  }
+  } else {
   current.wall = false;
   for (let i = 0; i < current.neighbors.length; i++) {
     let neighbor = current.neighbors[i]
@@ -156,6 +155,7 @@ function draw() {
       current = currentneighbors[cho]
       openSet.unshift(current)
     }
+  }
  currentneighbors = [];
  draw_grid();
  }

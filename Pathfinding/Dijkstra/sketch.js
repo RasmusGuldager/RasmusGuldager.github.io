@@ -205,8 +205,7 @@ function draw() {
   if (openSet.length == 0 || done) {
     stopTimer()
     noLoop()
-    return
-  }
+  } else {
   current = findCurrentNode();
   if (current == end) { 
     get_path(current);
@@ -223,6 +222,7 @@ function draw() {
       }
     }
   } 
+}
  draw_grid();
 }
 

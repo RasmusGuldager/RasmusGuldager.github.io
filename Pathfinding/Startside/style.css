@@ -5,7 +5,7 @@ body {
 
 img {
     position: absolute;
-    width: 8%;
+    width: 6rem;
     height: auto;
     top: 0;
     right: 0;
@@ -35,7 +35,7 @@ input {
 
 p {
     color: white;
-    margin-top: 6px;
+    margin-top: 0;
 }
 
 #Settings {
@@ -57,6 +57,10 @@ p {
 
 .boks:hover {
     background-color:#6cbbaa;
+}
+
+label {
+    margin-bottom: 0.38rem;
 }
 
 .navbar {
@@ -106,7 +110,7 @@ p {
 }
   
 .dropdown-content a:hover {
-    background-color: #ddd;
+    background-color: #b4c9d8;
 }
 
 .dropdown:hover .dropdown-content {
