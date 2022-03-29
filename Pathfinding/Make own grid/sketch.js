@@ -64,8 +64,21 @@ function draw_grid() {
       grid[j][i].draw_spot();
       if (grid[j][i].wall === true){
         grid[j][i].color = "black";
-      } else {
-        grid[j][i].color = "white";
+      } 
+      if (grid[j][i].weight === 1){
+        grid[j][i].color = "rgb(255,255,255)";
+      }
+      if (grid[j][i].weight === 2){
+        grid[j][i].color = "rgb(240,240,240)";
+      }
+      if (grid[j][i].weight === 3){
+        grid[j][i].color = "rgb(225,225,225)";
+      }
+      if (grid[j][i].weight === 4){
+        grid[j][i].color = "rgb(210,210,210)";
+      }
+      if (grid[j][i].weight === 5){
+        grid[j][i].color = "rgb(200,200,200)";
       }
     } 
   }
@@ -117,9 +130,29 @@ document.addEventListener("DOMContentLoaded", () => {
 function reload() {
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < rows; j++) {
+      if (grid[i][j].wall) {
+        grid[i][j].weight = Math.floor(Math.random(1)*5+1)
+      }
       grid[i][j].wall = false
       grid[i][j].color = "white"
-      grid[i][j].weight = Math.floor(Math.random(1)*5+1)
+    }
+  }
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      owngrid[i][j].wall = grid[i][j].wall
+      owngrid[i][j].color = grid[i][j].color
+      owngrid[i][j].weight = grid[i][j].weight
+    }
+  }
+  localStorage.setItem("OwnGrid", JSON.stringify(owngrid))
+}
+
+function randomize() {
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < rows; j++) {
+      if (!grid[i][j].wall) {
+        grid[i][j].weight = Math.floor(Math.random(1)*5+1)
+      }
     }
   }
   for (let i = 0; i < rows; i++) {
@@ -150,7 +183,7 @@ for (let i = 0; i < rows; i++) {
     owngrid[i][j].weight = grid[i][j].weight
   }
 }
+localStorage.setItem("OwnGrid", JSON.stringify(owngrid))
 }
 draw_grid();
-localStorage.setItem("OwnGrid", JSON.stringify(owngrid))
 }
