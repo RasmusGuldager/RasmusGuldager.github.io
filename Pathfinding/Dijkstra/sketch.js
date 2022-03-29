@@ -174,7 +174,6 @@ function get_path(current) {
    path.push(temp.prev);
    temp = temp.prev;
  }
-  done = true
 }
 
 var startY = 1;
@@ -208,8 +207,9 @@ function draw() {
   } else {
   current = findCurrentNode();
   if (current == end) { 
-    get_path(current);
-    console.log(`Shortest path is ${path.length} tiles with a weight of ${end.distance}`)
+    document.getElementById("Stats1").innerHTML = `Shortest path is: ${path.length} tiles`
+    document.getElementById("Stats2").innerHTML = `Total weight is: ${end.distance}`
+    done = true
   } else { 
     deleteElement(current,openSet);
     closedSet.push(current)
@@ -223,6 +223,8 @@ function draw() {
     }
   } 
 }
+ get_path(current)
  draw_grid();
+ path = []
 }
 

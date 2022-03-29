@@ -155,7 +155,6 @@ function get_path(current) {
    path.push(temp.prev);
    temp = temp.prev;
  }
-  done = true
 }
 
 var startY = 1;
@@ -189,9 +188,9 @@ function draw() {
   } else {
    current = openSet.shift()
   if (current == end) { 
-    get_path(current);
     document.getElementById("Stats1").innerHTML = `Shortest path is: ${path.length} tiles`
     document.getElementById("Stats2").innerHTML = `Total weight is: ${end.distance}`
+    done = true
   } else {
     closedSet.push(current)
     for (let i = 0; i < current.neighbors.length; i++) {
@@ -206,5 +205,7 @@ function draw() {
     }
   }
 }
+get_path(current);
  draw_grid();
+ path = []
 }

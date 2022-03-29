@@ -186,7 +186,6 @@ function get_path(current) {
    path.push(temp.prev);
    temp = temp.prev;
  }
-  done = true
 }
 
 var startY = 1;
@@ -222,6 +221,7 @@ function draw() {
     get_path(current);
     document.getElementById("Stats1").innerHTML = `Shortest path is: ${path.length} tiles`
     document.getElementById("Stats2").innerHTML = `Total weight is: ${end.g}`
+    done = true
   } else {
     deleteElement(current,openSet);
   closedSet.push(current);
@@ -246,5 +246,7 @@ function draw() {
    }
   }
 }
+get_path(current)
 draw_grid();
+path = []
 }
