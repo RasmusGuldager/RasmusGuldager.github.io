@@ -6,7 +6,7 @@ if (localStorage.getItem("grid") !== null) {
 } else {
     document.getElementById("rowsCols").value = 30
     document.getElementById("width").value = 450
-    document.getElementById("walls").value = 50
+    document.getElementById("walls").value = 30
 }
 
 document.getElementById("checkbox1").checked = localStorage.getItem("useMaze") == "true"
@@ -67,6 +67,18 @@ for (let i = 0; i <= 3; i++) {
     let {rows} = JSON.parse(localStorage.getItem("grid"))
     if (localStorage.getItem("useMaze") == "true" && rows != JSON.parse(localStorage.getItem("info")).length) {
       window.alert("Generate a maze first")
+      document.getElementById("path1").href = ""
+      document.getElementById("path2").href = ""
+      document.getElementById("path3").href = ""
+      document.getElementById("path4").href = ""
+    }
+  })
+}
+
+for (let i = 0; i <= 3; i++) {
+  document.querySelectorAll(".path")[i].addEventListener("click", () => {
+    if (localStorage.getItem("useOwnGrid") == "true" && localStorage.getItem("OwnGrid") == null) {
+      window.alert("Make your own grid first")
       document.getElementById("path1").href = ""
       document.getElementById("path2").href = ""
       document.getElementById("path3").href = ""
