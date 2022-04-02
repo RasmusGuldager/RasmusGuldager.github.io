@@ -22,8 +22,8 @@
         <h2>Settings</h2>
         <div class="boks"><p>Rows / Columns</p>
         <input id="rowsCols" type="number"></div>
-        <div class="boks"><p>Width (px)</p>
-        <input id="width" type="number"></div>
+        <div class="boks"><p>FPS limit</p>
+        <input id="fps" type="number"></div>
         <div class="boks"><p>% of nodes that are walls</p>
         <input id="walls" type="number"> </div>
         <p>Use maze in pathfinding</p>
@@ -56,6 +56,25 @@
     <button class="dropbtn" id="MakeGrid" onClick="window.location.href='Pathfinding/Make own grid/Makeowngrid.html'">Make your own grid</button>
   </div>
   </div>
+</div>
+
+<div id="vejledning">
+<p class="vejledningstekst" style="font-size: larger;font-weight: bold;">Brugervejledning</p><br>
+<p class="vejledningstekst" style="font-weight: bold;">Lav et grid</p>
+<p class="vejledningstekst">I toppen af hjemmesiden vil de se menuerne Pathfinding, Mazegeneration og Make your own 
+  grid. Hvis du klikker på "Make your own grid" har du mulighed for at design dit eget grid med vægte og vægge.
+Hvis du holder musen over "Mazegeneration" har du mulighed for at vælge mellem 2 algoritmer der kan generere labyrinter
+for dig. Under settings til venstre, i bunden, har du mulighed for vælge om du vil bruge en labyrint eller dit eget 
+grid i pathfinding. Hvis begge er slået fra vil der blive genereret et tilfældigt grid ud fra det antal vægge du har
+angivet i input felt nr. 3</p><br>
+<p class="vejledningstekst" style="font-weight: bold;">Pathfinding</p>
+<p class="vejledningstekst">Holder du musen over "Pathfinding" har du mulighed for at vælge mellem 4 algoritmer. På
+  dit grid vil der være forskellige farver. Kanternes vægte er vist vha. farvekoder. Hvis noden er hvid vil den have
+  en vægt på 1, hvorefter vægten bliver højere samtidig med at farven bliver mørkere. Hver node vil have en vægt mellem 1 og 5.
+  De to gule noder er start og slut. Alle røde noder er de noder som algoritmen allerede har besøgt. Alle grønne noder
+  er de noder som algoritmer har at vælge imellem. De blå noder er en del af den vej som algoritmen har fundet.
+</p>
+
 </div>
 
 <script src="Pathfinding/Startside/startside.js"> </script>

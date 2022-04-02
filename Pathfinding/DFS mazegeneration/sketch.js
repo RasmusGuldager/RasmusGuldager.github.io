@@ -1,4 +1,4 @@
-const {rows,cols,w} = JSON.parse(localStorage.getItem("grid"));
+const {rows,cols,w,fps} = JSON.parse(localStorage.getItem("grid"));
 
 var grid = new Array(cols);
 let info = new Array(cols)
@@ -119,6 +119,7 @@ var currentneighbors = [];
 var current = grid[startY][startX];
 
 function draw() {
+  frameRate(Number(fps))
   if (openSet.length == 0) {
     stopTimer()
     noLoop()

@@ -1,4 +1,4 @@
-const {rows,cols,w,walls} = JSON.parse(localStorage.getItem("grid"));
+const {rows,cols,w,walls,fps} = JSON.parse(localStorage.getItem("grid"));
 
 const useMaze = localStorage.getItem("useMaze") == "true"
 const useOwnGrid = localStorage.getItem("useOwnGrid") == "true"
@@ -182,6 +182,7 @@ start.distance = 0;
 start.weight = 0;
 
 function draw() {
+  frameRate(Number(fps))
   if (openSet.length == 0 || done) {
     stopTimer()
     noLoop()

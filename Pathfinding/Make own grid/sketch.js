@@ -25,6 +25,7 @@ class Spot {
   this.color = "white"
   this.wall = false;
   this.weight = Math.floor(Math.random(1)*5+1);
+  
   this.draw_spot = function() {
     fill(color(this.color))
     stroke(0)
@@ -169,7 +170,7 @@ var start = grid[startY][startX];
 var end = grid[endY][endX];
 
 function draw() {
-frameRate(30)
+frameRate(60)
 if(mouseIsPressed) {
 for (let i = 0; i < rows; i++) {
   for (let j = 0; j < rows; j++) {

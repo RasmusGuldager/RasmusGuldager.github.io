@@ -1,11 +1,11 @@
 if (localStorage.getItem("grid") !== null) {
-    let {rows,w,walls} = JSON.parse(localStorage.getItem("grid")) 
+    let {rows,fps,walls} = JSON.parse(localStorage.getItem("grid")) 
     document.getElementById("rowsCols").value = rows
-    document.getElementById("width").value = Math.round(w*rows)
+    document.getElementById("fps").value = fps
     document.getElementById("walls").value = walls
 } else {
     document.getElementById("rowsCols").value = 30
-    document.getElementById("width").value = 450
+    document.getElementById("fps").value = 60
     document.getElementById("walls").value = 30
 }
 
@@ -32,7 +32,7 @@ document.querySelectorAll('input[type="checkbox"]')[1].addEventListener("click",
 
 for (let i = 0; i <= 5; i++) {
     document.querySelectorAll('a')[i].addEventListener("click", () => {
-        if (document.getElementById("rowsCols").value < 5 || document.getElementById("width").value < document.getElementById("rowsCols").value * 4 || document.getElementById("rowsCols").value > 100 || document.getElementById("walls").value < 0 || document.getElementById("walls").value > 100) {
+        if (document.getElementById("rowsCols").value < 5 || document.getElementById("fps").value < 1 || document.getElementById("rowsCols").value > 100 || document.getElementById("walls").value < 0 || document.getElementById("walls").value > 100) {
               window.alert("Maze is too large or too small")
               document.getElementById("path1").href = ""
               document.getElementById("path2").href = ""
@@ -43,22 +43,24 @@ for (let i = 0; i <= 5; i++) {
          } else {
             rows = document.getElementById("rowsCols").value;
             cols = document.getElementById("rowsCols").value;
-            w = document.getElementById("width").value/rows;
+            fps = document.getElementById("fps").value
             walls = document.getElementById("walls").value;
-            localStorage.setItem("grid", JSON.stringify({rows:rows,cols:cols,w:w,walls:walls}))
+            w = 450/rows;
+            localStorage.setItem("grid", JSON.stringify({rows:rows,cols:cols,w:w,walls:walls,fps:fps}))
             }
 })}
 
 document.querySelectorAll('button')[2].addEventListener("click", () => {
-  if (document.getElementById("rowsCols").value < 5 || document.getElementById("width").value < document.getElementById("rowsCols").value * 4 || document.getElementById("rowsCols").value > 100 || document.getElementById("walls").value < 0 || document.getElementById("walls").value > 100) {
+  if (document.getElementById("rowsCols").value < 5 || document.getElementById("fps").value < 1 || document.getElementById("rowsCols").value > 100 || document.getElementById("walls").value < 0 || document.getElementById("walls").value > 100) {
       window.alert("Maze is too large or too small")
       window.location.href = ""
   } else {
       rows = document.getElementById("rowsCols").value;
       cols = document.getElementById("rowsCols").value;
-      w = document.getElementById("width").value/rows;
+      fps = document.getElementById("fps").value;
       walls = document.getElementById("walls").value;
-      localStorage.setItem("grid", JSON.stringify({rows:rows,cols:cols,w:w,walls:walls}))
+      w = 450/rows;
+      localStorage.setItem("grid", JSON.stringify({rows:rows,cols:cols,w:w,walls:walls,fps:fps}))
   }
 })
 

@@ -46,6 +46,25 @@ p {
     top: 0;
 }
 
+.vejledningstekst {
+    color: black;
+    margin: 0;
+}
+
+#vejledning {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 35%;
+    left: 30%;
+    padding: 0.5rem;
+    width: 45rem;
+    border: solid 1px black;
+    border-radius: 1rem;
+    background-color: rgb(236, 236, 236);
+    align-items: left;
+}
+
 #wrap {
     display: flex;
     align-items: flex-start;
@@ -83,7 +102,7 @@ label {
     padding: 14px 66px;
     background-color: inherit;
     font-family: inherit; 
-    width: 22rem;
+    width: 20rem;
 }
 
 .dropdown:hover .dropbtn {
@@ -97,7 +116,7 @@ label {
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    width: 22rem;
+    width: 20rem;
 }
 
 .dropdown-content a {
