@@ -197,6 +197,7 @@ var end = grid[endY][endX];
 var openSet = [start];
 var closedSet = [];
 var path = [];
+let tal = 0
 start.distance = 0
 start.weight = 0
 
@@ -208,7 +209,7 @@ function draw() {
   } else {
   current = findCurrentNode();
   if (current == end) { 
-    document.getElementById("Stats1").innerHTML = `Shortest path is: ${path.length} tiles`
+    document.getElementById("Stats1").innerHTML = `Shortest path is: ${tal} tiles`
     document.getElementById("Stats2").innerHTML = `Total weight is: ${end.distance}`
     done = true
   } else { 
@@ -226,6 +227,7 @@ function draw() {
 }
  get_path(current)
  draw_grid();
+ tal = path.length
  path = []
 }
 

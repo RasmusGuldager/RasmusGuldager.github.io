@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DFS pathfinding</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="../libraries/p5.min.js"></script>
+    <script src="../libraries/p5.sound.min.js"></script>
+    <script>
+      function reload() {
+        location.reload()}
+    </script>
+  </head>
+
+  <body>
+    <h1 onClick="window.location.href='../index.html'">SRP Projekt (Performance)</h1>
+    <a href="../index.html"><img src="../Graph.png" alt="Graph"></a>
+
+    <div id="settings">
+      <h2>Settings & stats</h2><br>
+    <button id="reset" type="button" onClick="reload()">Reset</button><br>
+    <h2 id="Stopwatch">
+      Execution time: 
+    </h2>
+    <p id="Stats1" style="margin-bottom: 0;">Shortest path is:</p>
+    <p id="Stats2" style="margin-top: 0.5rem;">Total weight is: </p>
+  </div>
+      
+ <script src="sketch.js"></script>
+  </body>
+</html>

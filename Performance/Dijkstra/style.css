@@ -1,0 +1,66 @@
+html, body {
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  transform: translate(-50%, -50%);
+}
+
+h1 {
+  color: rgb(255, 255, 255);
+  background-color: #3d23ad;
+  padding: 1.9%;
+  letter-spacing: 0.15rem;
+  text-align: center;
+  margin: 0;
+  font-family: lucida, monospace;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+h2 {
+  color: white;
+  font-size: large;
+}
+
+#settings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #5a8eff;
+  position: absolute;
+  left: 0;
+  width: 12.5rem;
+  height: 31rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  color: white;
+}
+
+button {
+  border-radius: 0.3rem;
+  border-color: #2b6777;
+  padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+  cursor: pointer;
+  color: black;
+}
+
+img {
+  position: absolute;
+  width: 6rem;
+  height: auto;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}

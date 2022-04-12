@@ -6,16 +6,16 @@
 
     <title>SRP Projekt</title>
 
-    <link rel="stylesheet" type="text/css" href="Pathfinding/Startside/style.css">
+    <link rel="stylesheet" type="text/css" href="Startside/style.css">
 
-    <script src="Pathfinding/libraries/p5.min.js"></script>
-    <script src="Pathfinding/libraries/p5.sound.min.js"></script>
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
 
   </head>
 
   <body>
-    <img src="Pathfinding/Graph.png" alt="Graph">
-    <h1>SRP Projekt</h1>
+    <img src="Graph.png" alt="Graph">
+    <h1>SRP Projekt (Performance)</h1>
     <div id="wrap">
 
       <div id="Settings">
@@ -42,21 +42,23 @@
     <div class="dropdown">
       <button class="dropbtn">Pathfinding</button>
     <div class="dropdown-content">
-    <a id="path1" class="path" href="Pathfinding/A-star/A-star.html">A* pathfinding</a>
-    <a id="path2" class="path" href="Pathfinding/BFS/BFS.html">BFS pathfinding</a>
-    <a id="path3" class="path" href="Pathfinding/DFS/DFS.html">DFS pathfinding</a>
-    <a id="path4" class="path" href="Pathfinding/Dijkstra/Dijkstra.html">Dijkstra pathfinding</a></div></div>
+    <a id="path1" class="path" href="A-star/A-star.html">A* pathfinding</a>
+    <a id="path2" class="path" href="BFS/BFS.html">BFS pathfinding</a>
+    <a id="path3" class="path" href="DFS/DFS.html">DFS pathfinding</a>
+    <a id="path4" class="path" href="Dijkstra/Dijkstra.html">Dijkstra pathfinding</a></div></div>
     <div class="dropdown">
       <button class="dropbtn">Mazegeneration</button>
       <div class="dropdown-content">
-    <a id="maze1" class="mazee" href="Pathfinding/DFS mazegeneration/DFSMaze.html">Randomized DFS mazegeneration</a>
-    <a id="maze2" class="mazee" href="Pathfinding/Prim's mazegeneration/PrimsMaze.html">Randomized Prim's mazegeneration</a>
+    <a id="maze1" class="mazee" href="DFS mazegeneration/DFSMaze.html">Randomized DFS mazegeneration</a>
+    <a id="maze2" class="mazee" href="Prim's mazegeneration/PrimsMaze.html">Randomized Prim's mazegeneration</a>
   </div></div>
   <div class="dropdown">
-    <button class="dropbtn" id="MakeGrid" onClick="window.location.href='Pathfinding/Make own grid/Makeowngrid.html'">Make your own grid</button>
+    <button class="dropbtn" id="MakeGrid" onClick="window.location.href='Make own grid/Makeowngrid.html'">Make your own grid</button>
   </div>
   </div>
 </div>
+
+<button style="position:absolute;right:0;bottom:0;background-color:white;border-width:0;;" onClick="window.location.href='../index.html'">Tilbage</button>
 
 <div id="vejledning">
 <p class="vejledningstekst" style="font-size: larger;font-weight: bold;">Brugervejledning</p><br>
@@ -77,9 +79,7 @@ angivet i input felt nr. 3</p><br>
 
 </div>
 
-<button style="position:absolute;right:0;bottom:0;background-color:white;border-width:0;" onClick="window.location.href='Performance/index.html'">Dev</button>
-
-<script src="Pathfinding/Startside/startside.js"> </script>
+<script src="Startside/startside.js"> </script>
 
   </body>
 </html>

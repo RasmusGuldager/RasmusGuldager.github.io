@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>A* pathfinding</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script src="../libraries/p5.min.js"></script>
+    <script src="../libraries/p5.sound.min.js"></script>
+    <script>
+      window.onload = () => {
+        if (localStorage.getItem("heurist") !== null) {
+        document.getElementById("heurist").value = localStorage.getItem("heurist")
+      } else {
+        document.getElementById("heurist").value = 2
+        localStorage.setItem("heurist", 2)
+      }
+    }
+      function reload() {
+        location.reload()}
+    </script>
+</head>
+
+<body>
+  <h1 onClick="window.location.href='../index.html'">SRP Projekt (Performance)</h1>
+  <a href="../index.html"><img src="../Graph.png" alt="Graph"></a>
+  
+
+  <div id="settings">
+    <h2>Settings & stats</h2><br>
+  <button id="reset" type="button" onClick="reload()">Reset</button><br>
+  <p>Heuristic value</p>
+  <input type="number" id="heurist"><br><br>
+  <p style="margin: 0;">The heuristic value is:</p>
+  <p style="margin-top: 0;">Dist(node, end) * input</p>
+  <p style="margin: 0;">If input ≤ 1</p>
+  <p style="margin-top: 0;">shortest path is guaranteed</p>
+  <h2 id="Stopwatch">
+    Execution time: 
+  </h2>
+  <p id="Stats1" style="margin-bottom: 0;">Shortest path is:</p>
+  <p id="Stats2" style="margin-top: 0.5rem;">Total weight is: </p>
+</div>
+    
+<script>
+  document.querySelector('input').addEventListener("input", () => {
+    localStorage.setItem("heurist", document.getElementById("heurist").value)
+  })
+</script>
+
+<script src="sketch.js"></script>
+</body>
+</html>

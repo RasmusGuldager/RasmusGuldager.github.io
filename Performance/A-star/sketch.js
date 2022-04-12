@@ -6,16 +6,21 @@ const useOwnGrid = localStorage.getItem("useOwnGrid") == "true"
 const info = JSON.parse(localStorage.getItem("info"))
 const owngrid = JSON.parse(localStorage.getItem("OwnGrid"))
 
+const heuristic = localStorage.getItem("heurist")
+
 var grid = new Array(cols);
 
 var start;
 var end;
 
 let done = false;
+let sto = false
 
 class Spot {
   constructor(i,j) {
-  this.distance = Infinity;
+  this.h = 0;
+  this.g = 0;
+  this.f = 0;
   this.i = i;
   this.j = j;
   this.color = "white"
@@ -84,28 +89,30 @@ for (let i = 0; i < rows; i++) {
   }
   for (let i = 0; i < grid[startX][startY].neighbors.length; i++) {
     grid[startX][startY].neighbors[i].wall = false
+    grid[startX][startY].neighbors[i].weight = Math.floor(Math.random(1)*5+1)
     } 
   for (let i = 0; i < grid[endX][endY].neighbors.length; i++) {
     grid[endX][endY].neighbors[i].wall = false
+    grid[startX][startY].neighbors[i].weight = Math.floor(Math.random(1)*5+1)
   }
   if (useMaze) {
-  for (let i = 0; i < rows; i++) {
-    for (let j = 0; j < cols; j++) {
-      grid[j][i].wall = info[j][i].wall == true
-      grid[j][i].color = info[j][i].color
-      grid[j][i].weight = 0
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        grid[j][i].wall = info[j][i].wall == true
+        grid[j][i].color = info[j][i].color
+        grid[j][i].weight = 0
+      }
     }
   }
-}
-if (useOwnGrid) {
-  for (let i = 0; i < rows; i++) {
-    for (let j = 0; j < cols; j++) {
-      grid[j][i].wall = owngrid[j][i].wall == true
-      grid[j][i].weight = owngrid[j][i].weight
-      grid[j][i].color = owngrid[j][i].color
+  if (useOwnGrid) {
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        grid[j][i].wall = owngrid[j][i].wall == true
+        grid[j][i].weight = owngrid[j][i].weight
+        grid[j][i].color = owngrid[j][i].color
+      }
     }
   }
-}
 }
 
 function draw_grid() {
@@ -144,8 +151,31 @@ function draw_grid() {
   current.color = "aqua";
   start.color = "Yellow"
   end.color = "Yellow";
-  start.wall = false;
-  end.wall = false;
+}
+
+function deleteElement(elt,arr) {
+  for (let i = arr.length; i >= 0; i--) {
+    if (arr[i] == elt) {
+      arr.splice(i,1);
+    }
+  }
+}
+
+function findCurrentNode() {
+  let curr = openSet[0];
+  for (let i =  1; i < openSet.length; i++) {
+    if (curr.f > openSet[i].f) {
+      curr = openSet[i];
+  }
+ }
+  return curr
+}
+
+function weight(node) {
+  if (useMaze) {
+    return 1
+  }
+  return node.weight
 }
 
 function get_path(current) {
@@ -178,37 +208,58 @@ var end = grid[endY][endX];
 var openSet = [start];
 var closedSet = [];
 var path = [];
-let tal = 0
-start.distance = 0;
 start.weight = 0;
+var begynd = 0
+var slut = 0
 
-function draw() {
-  frameRate(Number(fps))
-  if (openSet.length == 0 || done) {
-    stopTimer()
-    noLoop()
-  } else {
-   current = openSet.shift()
-  if (current == end) { 
-    document.getElementById("Stats1").innerHTML = `Shortest path is: ${tal} tiles`
-    document.getElementById("Stats2").innerHTML = `Total weight is: ${end.distance}`
-    done = true
-  } else {
-    closedSet.push(current)
+document.addEventListener("DOMContentLoaded", () => {
+  begynd = performance.now()
+  start.wall = false;
+  end.wall = false;
+  while (true) {
+    if (openSet.length == 0 || done) {
+      document.getElementById("Stopwatch").innerHTML = `Execution time: ${Math.round(slut-begynd)}ms`
+      sto = true
+      return
+    } else {
+    current = findCurrentNode();
+    if (current == end) { 
+      get_path(current);
+      document.getElementById("Stats1").innerHTML = `Shortest path is: ${path.length} tiles`
+      document.getElementById("Stats2").innerHTML = `Total weight is: ${end.g}`
+      done = true
+    } else {
+      deleteElement(current,openSet);
+    closedSet.push(current);
     for (let i = 0; i < current.neighbors.length; i++) {
       let neighbor = current.neighbors[i];
-      if(!neighbor.wall && !closedSet.includes(neighbor) && !openSet.includes(neighbor)) {
-      openSet.push(neighbor)
-      }
-      if (current.distance + neighbor.weight < neighbor.distance) {
-        neighbor.distance = current.distance + neighbor.weight
-        neighbor.prev = current
-      }
+      if (!closedSet.includes(neighbor) && !neighbor.wall) {
+          let temp_g = current.g + weight(neighbor);
+          if (openSet.includes(neighbor)) {
+            if (temp_g < neighbor.g) {
+              neighbor.g = temp_g;
+              neighbor.prev = current;
+              neighbor.f = neighbor.g + neighbor.h;
+            }
+           } else {
+            neighbor.g = temp_g;
+            openSet.push(neighbor);
+            neighbor.prev = current;
+            neighbor.h = Math.sqrt(Math.pow(neighbor.i-end.i,2)+Math.pow(neighbor.j-end.j,2)) * heuristic;
+            neighbor.f = neighbor.g + neighbor.h;
+          }
+        } 
+     }
     }
   }
-}
-get_path(current);
- draw_grid();
- tal = path.length
- path = []
+  slut = performance.now()
+  }
+})
+
+function draw() {
+  draw_grid();
+  if (sto) {
+    noLoop()
+    draw_grid()
+  }
 }

@@ -144,8 +144,6 @@ function draw_grid() {
   current.color = "aqua";
   start.color = "Yellow"
   end.color = "Yellow";
-  start.wall = false;
-  end.wall = false;
 }
 
 function get_path(current) {
@@ -182,11 +180,15 @@ let tal = 0
 start.distance = 0;
 start.weight = 0;
 
-function draw() {
-  frameRate(Number(fps))
+document.addEventListener("DOMContentLoaded", () => {
+  begynd = performance.now()
+  start.wall = false;
+  end.wall = false;
+ while (true) {
   if (openSet.length == 0 || done) {
-    stopTimer()
-    noLoop()
+    document.getElementById("Stopwatch").innerHTML = `Execution time: ${Math.round(slut-begynd)}ms`
+    sto = true
+    return
   } else {
    current = openSet.shift()
   if (current == end) { 
@@ -207,8 +209,15 @@ function draw() {
     }
   }
 }
+slut = performance.now()
+}
+})
+
+function draw() {
 get_path(current);
  draw_grid();
- tal = path.length
- path = []
+ if (sto) {
+  noLoop()
+  draw_grid()
+}
 }

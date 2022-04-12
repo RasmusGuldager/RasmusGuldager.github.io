@@ -30,7 +30,7 @@ class Spot {
 
   this.draw_spot = function() {
     fill(color(this.color))
-    stroke(0);
+    stroke(0)
     rect(this.i*w,this.j*w,w,w);
     if (done && !useMaze) {
       text(this.weight,this.i*w,(this.j+1)*w)
@@ -50,7 +50,7 @@ class Spot {
     if (this.i > 0 ) {
       this.neighbors.push(grid[this.j][this.i-1]);
     }
-    if (!useMaze) {
+    if(!useMaze) {
     if (this.i > 0 && this.j > 0) {
       this.neighbors.push(grid[this.j-1][this.i-1]);
     }
@@ -62,8 +62,8 @@ class Spot {
     }
     if (this.i > 0 && this.j < rows-1 ) {
       this.neighbors.push(grid[this.j+1][this.i-1]);
-    }
-  } 
+    } 
+  }
   }
 }
 }
@@ -89,23 +89,23 @@ for (let i = 0; i < rows; i++) {
     grid[endX][endY].neighbors[i].wall = false
   }
   if (useMaze) {
-  for (let i = 0; i < rows; i++) {
-    for (let j = 0; j < cols; j++) {
-      grid[j][i].wall = info[j][i].wall == true
-      grid[j][i].color = info[j][i].color
-      grid[j][i].weight = 0
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        grid[j][i].wall = info[j][i].wall == true
+        grid[j][i].color = info[j][i].color
+        grid[j][i].weight = 0
+      }
     }
   }
-}
-if (useOwnGrid) {
-  for (let i = 0; i < rows; i++) {
-    for (let j = 0; j < cols; j++) {
-      grid[j][i].wall = owngrid[j][i].wall == true
-      grid[j][i].weight = owngrid[j][i].weight
-      grid[j][i].color = owngrid[j][i].color
+  if (useOwnGrid) {
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        grid[j][i].wall = owngrid[j][i].wall == true
+        grid[j][i].weight = owngrid[j][i].weight
+        grid[j][i].color = owngrid[j][i].color
+      }
     }
   }
-}
 }
 
 function draw_grid() {
@@ -144,8 +144,25 @@ function draw_grid() {
   current.color = "aqua";
   start.color = "Yellow"
   end.color = "Yellow";
-  start.wall = false;
-  end.wall = false;
+}
+
+function deleteElement(elt,arr) {
+  for (let i = arr.length; i >= 0; i--) {
+    if (arr[i] == elt) {
+      arr.splice(i,1);
+    }
+  }
+}
+
+function findCurrentNode() {
+  let prevmax = Infinity;
+  for (let i =  0; i < openSet.length; i++) {
+    if (openSet[i].distance < prevmax) {
+      prevmax = openSet[i].distance
+      curr = openSet[i];
+  }
+ }
+  return curr
 }
 
 function get_path(current) {
@@ -179,36 +196,47 @@ var openSet = [start];
 var closedSet = [];
 var path = [];
 let tal = 0
-start.distance = 0;
-start.weight = 0;
+start.distance = 0
+start.weight = 0
 
-function draw() {
-  frameRate(Number(fps))
+document.addEventListener("DOMContentLoaded", () => {
+  begynd = performance.now()
+  start.wall = false;
+  end.wall = false;
+  while (true) {
   if (openSet.length == 0 || done) {
-    stopTimer()
-    noLoop()
+    document.getElementById("Stopwatch").innerHTML = `Execution time: ${Math.round(slut-begynd)}ms`
+    sto = true
+    return
   } else {
-   current = openSet.shift()
+  current = findCurrentNode();
   if (current == end) { 
+    get_path(current)
     document.getElementById("Stats1").innerHTML = `Shortest path is: ${tal} tiles`
     document.getElementById("Stats2").innerHTML = `Total weight is: ${end.distance}`
     done = true
-  } else {
+  } else { 
+    deleteElement(current,openSet);
     closedSet.push(current)
     for (let i = 0; i < current.neighbors.length; i++) {
       let neighbor = current.neighbors[i];
       if(!neighbor.wall && !closedSet.includes(neighbor) && !openSet.includes(neighbor)) {
       openSet.push(neighbor)
-      }
-      if (current.distance + neighbor.weight < neighbor.distance) {
         neighbor.distance = current.distance + neighbor.weight
         neighbor.prev = current
       }
     }
-  }
+  } 
 }
-get_path(current);
+slut = performance.now()
+}
+})
+
+function draw() {
  draw_grid();
- tal = path.length
- path = []
+ if (sto) {
+  noLoop()
+  draw_grid()
 }
+}
+
