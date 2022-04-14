@@ -118,45 +118,61 @@ var openSet = [start];
 var currentneighbors = [];
 var current = grid[startY][startX];
 
-function draw() {
-  frameRate(Number(fps))
-  if (openSet.length == 0) {
-    stopTimer()
-    noLoop()
-    createinfo()
-    localStorage.setItem("info", JSON.stringify(info))
-  } else {
-  current.wall = false;
-  for (let i = 0; i < current.neighbors.length; i++) {
-    let neighbor = current.neighbors[i]
-    if (neighbor.wall) {
-      currentneighbors.push(neighbor)
-    }
-  }
-    if (currentneighbors.length == 0) {
-      openSet.shift()
-      openSet.shift()
-      current = openSet[0]
+document.addEventListener("DOMContentLoaded", () => {
+  begynd = performance.now()
+  while (true) {
+    if (openSet.length == 0) {
+      document.getElementById("Stopwatch").innerHTML = `Execution time: ${Math.round(slut-begynd)}ms`
+      sto = true
+      createinfo()
+      localStorage.setItem("info", JSON.stringify(info))
+      return
     } else {
-      let cho = Math.floor(Math.random(1)*currentneighbors.length)
-      let temp = currentneighbors[cho];
-      if (current.j == temp.j-2) {
-        grid[current.j+1][current.i].wall = false
-        openSet.unshift(grid[current.j+1][current.i])
-      } else if (current.i == temp.i+2) {
-        grid[current.j][current.i-1].wall = false
-        openSet.unshift(grid[current.j][current.i-1])
-      } else if (current.j == temp.j+2) {
-        grid[current.j-1][current.i].wall = false
-        openSet.unshift(grid[current.j-1][current.i])
-      } else if (current.i == temp.i-2) {
-        grid[current.j][current.i+1].wall = false
-        openSet.unshift(grid[current.j][current.i+1])
+    current.wall = false;
+    current.color = "white"
+    for (let i = 0; i < current.neighbors.length; i++) {
+      let neighbor = current.neighbors[i]
+      if (neighbor.wall) {
+        currentneighbors.push(neighbor)
       }
-      current = currentneighbors[cho]
-      openSet.unshift(current)
     }
+      if (currentneighbors.length == 0) {
+        openSet.shift()
+        openSet.shift()
+        current = openSet[0]
+      } else {
+        let cho = Math.floor(Math.random(1)*currentneighbors.length)
+        let temp = currentneighbors[cho];
+        if (current.j == temp.j-2) {
+          grid[current.j+1][current.i].wall = false
+          grid[current.j+1][current.i].color = "white"
+          openSet.unshift(grid[current.j+1][current.i])
+        } else if (current.i == temp.i+2) {
+          grid[current.j][current.i-1].wall = false
+          grid[current.j][current.i-1].color = "white"
+          openSet.unshift(grid[current.j][current.i-1])
+        } else if (current.j == temp.j+2) {
+          grid[current.j-1][current.i].wall = false
+          grid[current.j-1][current.i].color = "white"
+          openSet.unshift(grid[current.j-1][current.i])
+        } else if (current.i == temp.i-2) {
+          grid[current.j][current.i+1].wall = false
+          grid[current.j][current.i+1].color = "white"
+          openSet.unshift(grid[current.j][current.i+1])
+        }
+        current = currentneighbors[cho]
+        openSet.unshift(current)
+      }
+    }
+   currentneighbors = [];
+  slut = performance.now()
   }
- currentneighbors = [];
- draw_grid();
- }
+})
+
+function draw() {
+  draw_grid();
+  if (sto) {
+    noLoop()
+    draw_grid()
+  }
+}

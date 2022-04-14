@@ -25,53 +25,10 @@
       <p style="margin-top: 0;">Maze is autosaved when done</p><br>
     <button id="reset" type="button" onClick="reload()">Reset</button><br>
     <h2 id="Stopwatch">
-      00:00
+      Execution time: 
     </h2>
   </div>
       
-      <script>
-      const timer = document.getElementById("Stopwatch");
-      
-      var min = 0;
-      var sec = -1;
-      var stoptime = false;
-      
-      function stopTimer() {
-        if (stoptime == false) {
-          stoptime = true;
-        }
-      }
-      
-      function stopwatch() {
-          if (stoptime == false) {
-          sec = parseInt(sec);
-          min = parseInt(min);
-      
-          sec = sec + 1;
-      
-          if (sec == 60) {
-            min = min + 1;
-            sec = 0;
-          }
-      
-          if (sec < 10 || sec == 0) {
-            sec = '0' + sec;
-          }
-          if (min < 10 || min == 0) {
-            min = '0' + min;
-          }
-      
-          if (isNaN(min)) [
-            min = "00"
-          ]
-      
-          timer.innerHTML = `${min}:${sec}`;
-      
-          setTimeout("stopwatch()", 1000);
-        }
-      }
-      document.addEventListener("DOMContentLoaded", stopwatch())
-      </script>
-      <script src="sketch.js"></script>
+    <script src="sketch.js"></script>
   </body>
 </html>

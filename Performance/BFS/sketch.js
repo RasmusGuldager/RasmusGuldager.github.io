@@ -176,7 +176,6 @@ var end = grid[endY][endX];
 var openSet = [start];
 var closedSet = [];
 var path = [];
-let tal = 0
 start.distance = 0;
 start.weight = 0;
 
@@ -191,8 +190,9 @@ document.addEventListener("DOMContentLoaded", () => {
     return
   } else {
    current = openSet.shift()
-  if (current == end) { 
-    document.getElementById("Stats1").innerHTML = `Shortest path is: ${tal} tiles`
+  if (current == end) {
+    get_path(current); 
+    document.getElementById("Stats1").innerHTML = `Shortest path is: ${path.length} tiles`
     document.getElementById("Stats2").innerHTML = `Total weight is: ${end.distance}`
     done = true
   } else {
@@ -214,8 +214,7 @@ slut = performance.now()
 })
 
 function draw() {
-get_path(current);
- draw_grid();
+draw_grid();
  if (sto) {
   noLoop()
   draw_grid()

@@ -131,40 +131,56 @@ for (let i = 0; i < start.neighbors.length; i++) {
   openSet.push(start.neighbors[i])
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  begynd = performance.now()
+  while (true) {
+    if (openSet.length == 0) {
+      document.getElementById("Stopwatch").innerHTML = `Execution time: ${Math.round(slut-begynd)}ms`
+      sto = true
+      createinfo()
+      localStorage.setItem("info", JSON.stringify(info))
+      return
+    } else {
+    current = openSet[Math.floor(Math.random(1)*openSet.length)]
+    deleteElement(current,openSet)
+    partofmaze.push(current)
+    current.wall = false;
+    current.color = "white"
+    for (let i = 0; i < current.neighbors.length; i++) {
+      let neighbor = current.neighbors[i]
+      if (neighbor.wall) {
+        openSet.push(neighbor)
+      }
+    }
+    for (let i = 0; i < current.neighbors.length; i++) {
+      if (partofmaze.includes(current.neighbors[i])) {
+        currenttochoosefrom.push(current.neighbors[i])
+      }
+    }
+    let temp = currenttochoosefrom[Math.floor(Math.random(1)*currenttochoosefrom.length)]
+      if (current.j == temp.j-2) {
+        grid[current.j+1][current.i].wall = false
+        grid[current.j+1][current.i].color = "white"
+      } else if (current.i == temp.i+2) {
+        grid[current.j][current.i-1].wall = false
+        grid[current.j][current.i-1].color = "white"
+      } else if (current.j == temp.j+2) {
+        grid[current.j-1][current.i].wall = false
+        grid[current.j-1][current.i].color = "white"
+      } else if (current.i == temp.i-2) {
+        grid[current.j][current.i+1].wall = false
+        grid[current.j][current.i+1].color = "white"
+      }
+    }
+   currenttochoosefrom = [];
+  slut = performance.now()
+  }
+})
+
 function draw() {
-  frameRate(Number(fps))
-  if (openSet.length == 0) {
+  draw_grid();
+  if (sto) {
     noLoop()
-    stopTimer()
-    createinfo()
-    localStorage.setItem("info", JSON.stringify(info))
-  } else {
-  current = openSet[Math.floor(Math.random(1)*openSet.length)]
-  deleteElement(current,openSet)
-  partofmaze.push(current)
-  current.wall = false;
-  for (let i = 0; i < current.neighbors.length; i++) {
-    let neighbor = current.neighbors[i]
-    if (neighbor.wall) {
-      openSet.push(neighbor)
-    }
+    draw_grid()
   }
-  for (let i = 0; i < current.neighbors.length; i++) {
-    if (partofmaze.includes(current.neighbors[i])) {
-      currenttochoosefrom.push(current.neighbors[i])
-    }
-  }
-  let temp = currenttochoosefrom[Math.floor(Math.random(1)*currenttochoosefrom.length)]
-    if (current.j == temp.j-2) {
-      grid[current.j+1][current.i].wall = false
-    } else if (current.i == temp.i+2) {
-      grid[current.j][current.i-1].wall = false
-    } else if (current.j == temp.j+2) {
-      grid[current.j-1][current.i].wall = false
-    } else if (current.i == temp.i-2) {
-      grid[current.j][current.i+1].wall = false
-    }
-  }
- currenttochoosefrom = [];
- draw_grid();
- }
+}

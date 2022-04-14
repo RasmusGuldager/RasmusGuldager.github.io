@@ -23,6 +23,7 @@ class Spot {
   this.neighbors = []
   this.prev = undefined;
   this.wall = false;
+  this.visited = false;
   this.weight = Math.floor(Math.random(1)*5+1)
   if (Math.random(1) < walls/100) {
     this.wall = true;
@@ -178,7 +179,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return
     } else {
     current = openSet[0];
-    TotalWeight += current.weight;
+    if (!current.visited) {
+      TotalWeight += current.weight;
+      current.visited = true 
+    }
     if (current == end) { 
       path = openSet
       done = true
@@ -195,8 +199,8 @@ document.addEventListener("DOMContentLoaded", () => {
           FoundNeighbor = true
         }
         if (i == current.neighbors.length - 1 && !FoundNeighbor) {
-          closedSet.push(openSet.shift())
-          TotalWeight -= current.weight
+          closedSet.push(openSet.shift());
+          TotalWeight -= current.weight; 
         }
       } 
       }

@@ -32,7 +32,7 @@ document.querySelectorAll('input[type="checkbox"]')[1].addEventListener("click",
 
 for (let i = 0; i <= 5; i++) {
     document.querySelectorAll('a')[i].addEventListener("click", () => {
-        if (document.getElementById("rowsCols").value < 5 || document.getElementById("fps").value < 1 || document.getElementById("rowsCols").value > 100 || document.getElementById("walls").value < 0 || document.getElementById("walls").value > 100) {
+        if (document.getElementById("rowsCols").value < 5 || document.getElementById("fps").value < 1 || document.getElementById("rowsCols").value > 350 || document.getElementById("walls").value < 0 || document.getElementById("walls").value > 100) {
               window.alert("Maze is too large or too small")
               document.getElementById("path1").href = ""
               document.getElementById("path2").href = ""

@@ -176,7 +176,10 @@ function draw() {
     noLoop()
   } else {
   current = openSet[0];
-  TotalWeight += current.weight;
+  if (!current.visited) {
+    TotalWeight += current.weight;
+    current.visited = true 
+  }
   if (current == end) { 
     path = openSet
     done = true
